@@ -22,8 +22,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+interface Prediction {
+  predicted_class: string;
+}
+
 const selectedImage = ref<File | null>(null);
-const responseData = ref('');
+const responseData = ref<Prediction>();
 
 const handleImageSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
