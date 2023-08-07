@@ -6,7 +6,7 @@
     </div>
     <div class="card w-96 bg-base-100 shadow-xl">
       <div class="h-44 bg-gray-200 flex justify-center items-center">
-        <img v-if="selectedImage" :src="selectedImage" alt="Selected" class="w-full h-full object-cover">
+        <img v-if="imageURL" :src="imageURL" alt="Selected" class="w-full h-full object-cover">
       </div>
       <div class="card-body">
         <h2 class="card-title">Ajouter une image</h2>
@@ -28,11 +28,13 @@ interface Prediction {
 
 const selectedImage = ref();
 const responseData = ref<Prediction>();
+const imageURL = ref();
 
 const handleImageSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
     selectedImage.value = target.files[0];
+    imageURL.value = URL.createObjectURL(selectedImage.value);
   }
 };
   
