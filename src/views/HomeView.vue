@@ -1,5 +1,9 @@
 <template>
-  <main class="flex justify-center items-center">
+  <main class="flex justify-center items-center flex-col">
+    <div class="alert alert-success w-96 my-3" v-if="responseData">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Résultat : "{{ responseData.predicted_class }}"</span>
+    </div>
     <div class="card w-96 bg-base-100 shadow-xl">
       <div class="h-44 bg-gray-200 flex justify-center items-center">
         <img v-if="selectedImage" :src="selectedImage" alt="Selected" class="w-full h-full object-cover">
@@ -19,6 +23,7 @@
 import { ref } from 'vue';
 
 const selectedImage = ref<File | null>(null);
+const responseData = ref('');
 
 const handleImageSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -34,12 +39,12 @@ const analyzeImage = async () => {
     console.log(selectedImage.value)
 
     try {
-      const response = await fetch('http://localhost:8000/api/scan/', {
+      const response = await fetch('http://simplon.fredy-mc.fr/backend-male-fertility/api/scan/', {
         method: 'POST',
         body: formData,
       });
 
-      const responseData = await response.json();
+      responseData.value = await response.json();
       console.log('Response Data:', responseData);
     } catch (error) {
       console.error('An error occurred:', error);
