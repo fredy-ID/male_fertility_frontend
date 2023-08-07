@@ -26,7 +26,7 @@ interface Prediction {
   predicted_class: string;
 }
 
-const selectedImage = ref<File | null>(null);
+const selectedImage = ref();
 const responseData = ref<Prediction>();
 
 const handleImageSelect = (event: Event) => {
