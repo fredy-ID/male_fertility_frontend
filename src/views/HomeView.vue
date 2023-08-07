@@ -1,8 +1,10 @@
 <template>
   <main class="flex justify-center items-center flex-col">
-    <div class="alert alert-success w-96 my-3" v-if="responseData">
+    <div class="alert alert-success w-96 my-3 flex justify-center items-center flex-col" v-if="responseData">
       <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
       <span>Résultat : "{{ responseData.predicted_class }}"</span>
+      <p><strong>Classes : </strong> ['amorphous', 'normal', 'pyriform', 'tapered']</p>
+      <p><strong>Probabilités : </strong> {{ responseData.class_probabilities[0] }}</p>
     </div>
     <div class="card w-96 bg-base-100 shadow-xl">
       <div class="h-44 bg-gray-200 flex justify-center items-center">
@@ -24,8 +26,9 @@ import { ref } from 'vue';
 
 interface Prediction {
   predicted_class: string;
+  class_probabilities: Array<string>;
 }
-
+  
 const selectedImage = ref();
 const responseData = ref<Prediction>();
 const imageURL = ref();
