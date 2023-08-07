@@ -26,7 +26,7 @@ const handleImageSelect = (event: Event) => {
     selectedImage.value = target.files[0];
   }
 };
-
+  
 const analyzeImage = async () => {
   if (selectedImage.value) {
     const formData = new FormData();
