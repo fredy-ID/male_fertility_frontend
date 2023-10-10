@@ -61,10 +61,6 @@ const analyzeImage = async () => {
   }
 };
 
-
-
-
-
 // const analyzeImage = async () => {
 //   if (selectedImage.value) {
 //     const formData = new FormData();
